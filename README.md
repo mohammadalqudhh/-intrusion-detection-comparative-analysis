@@ -15,7 +15,31 @@ Modern cybersecurity architectures require a rigorous balance between detection 
 The experimental pipeline evaluates the cross-domain robustness of three machine learning paradigms (Gradient Boosting, Kernel Machines, and Artificial Neural Networks) across two fundamentally different attack spaces: packet-level tabular network flows and dynamic mobile syscall execution frequencies[cite: 9, 10].
 
 ---
+## Repository Roadmap & File Architecture
 
+```text
+├── notebooks/
+│   ├── 01_NSL_KDD_Pipeline.ipynb          # Pipeline for tabular network intrusion detection
+│   ├── 02_CICMalDroid_Pipeline.ipynb      # Pipeline for Android dynamic syscall classification
+│   └── 03_Comparative_Evaluation.ipynb    # Cross-domain synthesis, trade-offs, and Pareto analysis
+│
+├── results/
+│   ├── nsl_kdd/                           # Empirical artifacts for NSL-KDD benchmark
+│   │   ├── confusion_matrices/            # Multi-class attribution heatmaps (U2R, R2L, DoS, Probe, Normal)
+│   │   ├── feature_importance/            # Score distributions (Chi2, MI) and RFECV elimination steps
+│   │   └── metrics_summary.csv            # Tabular logs for accuracy, Macro F1, and training latency
+│   ├── maldroid/                          # Empirical artifacts for CIC-MalDroid2020 benchmark
+│   │   ├── confusion_matrices/            # 5-class malware attribution heatmaps
+│   │   ├── feature_importance/            # High-impact syscall/binder frequency rankings
+│   │   └── metrics_summary.csv            # Tabular logs for accuracy, Macro F1, and training latency
+│   └── comparison/                        # Cross-domain evaluation plots and comparison charts
+│       ├── latency_vs_f1_tradeoff.png     # Pareto curve mapping training cost against generalization
+│       └── tuning_inflation_index.png     # GridSearchCV training time expansion analysis
+│
+├── models/                                # Serialized estimators and selector checkpoints (.pkl / .joblib)
+├── requirements.txt                       # Environment dependencies and exact package versions
+└── README.md
+```
 ## Benchmark Datasets & Preprocessing
 
 | Benchmark Dataset | Problem Domain | Data Modality | Original Features | Processed Dimension | Target Classes |
