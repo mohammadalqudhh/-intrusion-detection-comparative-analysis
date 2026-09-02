@@ -24,7 +24,23 @@ The experimental pipeline evaluates the cross-domain robustness of three machine
 | **CIC-MalDroid2020** | Mobile Malware Attribution | Dynamic behavior logs tracking execution counts of Linux System Calls (Syscalls) and IPC Binders[cite: 5] | 471 attributes[cite: 5] | 470 normalized numeric frequency features[cite: 5] | 5 Classes: Benign, Adware, Banking, SMS Malware, Riskware[cite: 5] |
 
 ---
-
+├── notebooks/
+│   ├── NSL_KDD_Pipeline.ipynb          # Preprocessing, feature selection, and model training for network flows
+│   ├── CICMalDroid_Pipeline.ipynb      # Syscall frequency processing and multi-class classification for Android malware
+│   └── Cross_Domain_Comparison.ipynb   # Unified benchmark compilation, metric alignment, and trade-off evaluation
+│
+├── results/
+│   ├── nsl_kdd_results/                # NSL-KDD empirical outputs, metric logs, and diagnostic plots
+│   │   ├── confusion_matrices/         # Heatmaps for baseline and tuned XGBoost, SVM, and MLP
+│   │   └── feature_importance/         # Score distributions for Chi2, MI, and RFECV elimination curves
+│   ├── maldroid_results/               # CIC-MalDroid2020 outputs, per-class metrics, and diagnostic plots
+│   │   ├── confusion_matrices/         # Multi-class attribution matrices across all 5 malware families
+│   │   └── feature_importance/         # Top syscall/binder frequency rankings and wrapper subset logs
+│   └── comparative_evaluation/         # Cross-domain benchmark tables, Pareto frontiers, and latency comparisons
+│
+├── models/                             # Serialized estimators and optimal feature selector checkpoints (.pkl / .joblib)
+├── requirements.txt                    # Minimal working environment dependencies
+└── README.md
 ## Evaluated Architectures & Hyperparameter Optimization
 
 ### 1. Model Families & Parameter Tuning
@@ -121,22 +137,3 @@ Hyperparameter tuning via `GridSearchCV` was benchmarked as a core evaluation ax
 
 An end-to-end machine learning pipeline for detecting network anomalies and classifying Android malware behaviors using **NSL-KDD** and **CICMalDroid 2020** datasets.
 
----
-
-## 📁 Repository Structure
-
-```text
-├── datasets/
-│   ├── NSL-KDD/                    # Cleaned / sample dataset files
-│   └── CICMalDroid2020/            # Processed syscall/binder features
-├── notebooks/
-│   ├── 01_NSL_KDD_Pipeline.ipynb   # Preprocessing, Feature Selection & Training (NSL-KDD)
-│   ├── 02_MalDroid_Pipeline.ipynb  # Feature Extraction, Multi-class Classification (MalDroid)
-│   └── 03_Model_Comparison.ipynb   # Comprehensive evaluation, metrics & visualizations
-├── plots_and_results/
-│   ├── confusion_matrices/         # High-resolution confusion matrix heatmaps
-│   ├── feature_importance/         # Feature distribution and ranking plots (Chi2, MI, etc.)
-│   └── metrics_summary.csv         # Consolidated performance metrics across all models
-├── models/                         # Saved model checkpoints (.pkl / .joblib)
-├── requirements.txt                # Python dependencies
-└── README.md
