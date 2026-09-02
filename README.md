@@ -23,24 +23,6 @@ The experimental pipeline evaluates the cross-domain robustness of three machine
 | **NSL-KDD** | Network Intrusion Detection (NIDS) | Tabular connection flows, protocol types, network flags, and host-based error rates[cite: 3] | 41 attributes[cite: 3] | 117 features (Post One-Hot Encoding & `MinMaxScaler`)[cite: 3] | 5 Classes: Normal, DoS, Probe, R2L, U2R[cite: 3] |
 | **CIC-MalDroid2020** | Mobile Malware Attribution | Dynamic behavior logs tracking execution counts of Linux System Calls (Syscalls) and IPC Binders[cite: 5] | 471 attributes[cite: 5] | 470 normalized numeric frequency features[cite: 5] | 5 Classes: Benign, Adware, Banking, SMS Malware, Riskware[cite: 5] |
 
----
-├── notebooks/
-│   ├── NSL_KDD_Pipeline.ipynb          # Preprocessing, feature selection, and model training for network flows
-│   ├── CICMalDroid_Pipeline.ipynb      # Syscall frequency processing and multi-class classification for Android malware
-│   └── Cross_Domain_Comparison.ipynb   # Unified benchmark compilation, metric alignment, and trade-off evaluation
-│
-├── results/
-│   ├── nsl_kdd_results/                # NSL-KDD empirical outputs, metric logs, and diagnostic plots
-│   │   ├── confusion_matrices/         # Heatmaps for baseline and tuned XGBoost, SVM, and MLP
-│   │   └── feature_importance/         # Score distributions for Chi2, MI, and RFECV elimination curves
-│   ├── maldroid_results/               # CIC-MalDroid2020 outputs, per-class metrics, and diagnostic plots
-│   │   ├── confusion_matrices/         # Multi-class attribution matrices across all 5 malware families
-│   │   └── feature_importance/         # Top syscall/binder frequency rankings and wrapper subset logs
-│   └── comparative_evaluation/         # Cross-domain benchmark tables, Pareto frontiers, and latency comparisons
-│
-├── models/                             # Serialized estimators and optimal feature selector checkpoints (.pkl / .joblib)
-├── requirements.txt                    # Minimal working environment dependencies
-└── README.md
 ## Evaluated Architectures & Hyperparameter Optimization
 
 ### 1. Model Families & Parameter Tuning
