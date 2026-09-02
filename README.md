@@ -19,25 +19,19 @@ The experimental pipeline evaluates the cross-domain robustness of three machine
 
 ```text
 ├── notebooks/
-│   ├── 01_NSL_KDD_Pipeline.ipynb          # Pipeline for tabular network intrusion detection
-│   ├── 02_CICMalDroid_Pipeline.ipynb      # Pipeline for Android dynamic syscall classification
-│   └── 03_Comparative_Evaluation.ipynb    # Cross-domain synthesis, trade-offs, and Pareto analysis
+│   ├── nsl_kdd.ipynb                                # Tabular network intrusion detection pipeline
+│   ├── CICMalDroid_Main_Pipeline.ipynb              # Android dynamic syscall multi-class classifier
+│   ├── CICMalDroid_L2_Normalization.ipynb           # Experimental pipeline (L2 Normalization)
+│   ├── CICMalDroid_MinMax_Scaling.ipynb             # Experimental pipeline (MinMax Scaling)
+│   └── Cross_Domain_Comparison_NSL_vs_CIC.ipynb     # Cross-domain synthesis & trade-off analysis
 │
-├── results/
-│   ├── nsl_kdd/                           # Empirical artifacts for NSL-KDD benchmark
-│   │   ├── confusion_matrices/            # Multi-class attribution heatmaps (U2R, R2L, DoS, Probe, Normal)
-│   │   ├── feature_importance/            # Score distributions (Chi2, MI) and RFECV elimination steps
-│   │   └── metrics_summary.csv            # Tabular logs for accuracy, Macro F1, and training latency
-│   ├── maldroid/                          # Empirical artifacts for CIC-MalDroid2020 benchmark
-│   │   ├── confusion_matrices/            # 5-class malware attribution heatmaps
-│   │   ├── feature_importance/            # High-impact syscall/binder frequency rankings
-│   │   └── metrics_summary.csv            # Tabular logs for accuracy, Macro F1, and training latency
-│   └── comparison/                        # Cross-domain evaluation plots and comparison charts
-│       ├── latency_vs_f1_tradeoff.png     # Pareto curve mapping training cost against generalization
-│       └── tuning_inflation_index.png     # GridSearchCV training time expansion analysis
+├── reports/
+│   ├── NSL_KDD_Results_&_Evaluation.pdf             # Comprehensive NSL-KDD benchmark report
+│   ├── MalDroid_Results_&_Evaluation.pdf            # Mobile malware attribution evaluation report
+│   └── Cross_Domain_Comparative_Analysis.pdf        # Final cross-benchmark synthesis report
 │
-├── models/                                # Serialized estimators and selector checkpoints (.pkl / .joblib)
-├── requirements.txt                       # Environment dependencies and exact package versions
+├── .gitignore
+├── LICENSE
 └── README.md
 ```
 ## Benchmark Datasets & Preprocessing
