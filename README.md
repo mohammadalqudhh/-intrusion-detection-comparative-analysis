@@ -19,16 +19,16 @@ The experimental pipeline evaluates the cross-domain robustness of three machine
 
 ```text
 ├── notebooks/
-│   ├── nsl_kdd.ipynb                                # Tabular network intrusion detection pipeline
-│   ├── CICMalDroid_Main_Pipeline.ipynb              # Android dynamic syscall multi-class classifier
-│   ├── CICMalDroid_L2_Normalization.ipynb           # Experimental pipeline (L2 Normalization)
-│   ├── CICMalDroid_MinMax_Scaling.ipynb             # Experimental pipeline (MinMax Scaling)
-│   └── Cross_Domain_Comparison_NSL_vs_CIC.ipynb     # Cross-domain synthesis & trade-off analysis
+│   ├── nsl_kdd.ipynb                                # End-to-end pipeline covering all experiments on NSL-KDD
+│   ├── CICMalDroid_Main_Pipeline.ipynb              # End-to-end primary pipeline covering all experiments on CIC-MalDroid
+│   ├── CICMalDroid_L2_Normalization.ipynb           # Experimental pipeline variant (80/20 split & L2 normalization)
+│   ├── CICMalDroid_MinMax_Scaling.ipynb             # Experimental pipeline variant (70/30 split & MinMax scaling)
+│   └── Cross_Domain_Comparison_NSL_vs_CIC.ipynb     # Cross-domain synthesis & comparative benchmark notebook
 │
 ├── reports/
-│   ├── NSL_KDD_Results_&_Evaluation.pdf             # Comprehensive NSL-KDD benchmark report
-│   ├── MalDroid_Results_&_Evaluation.pdf            # Mobile malware attribution evaluation report
-│   └── Cross_Domain_Comparative_Analysis.pdf        # Final cross-benchmark synthesis report
+│   ├── NSL_KDD_Results_&_Evaluation.pdf             # Graphical analysis, confusion matrices & metrics for NSL-KDD
+│   ├── MalDroid_Results_&_Evaluation.pdf            # Graphical analysis, feature distributions & metrics for MalDroid
+│   └── Cross_Domain_Comparative_Analysis.pdf        # Comprehensive cross-dataset comparison report with unified charts
 │
 ├── .gitignore
 ├── LICENSE
@@ -133,7 +133,7 @@ Hyperparameter tuning via `GridSearchCV` was benchmarked as a core evaluation ax
 * **Operational Recommendation:** 
   For production inline network inspection and automated APK triage, **Baseline XGBoost with RFECV** provides the superior Pareto-optimal frontier between detection power and execution overhead[cite: 9, 10].
 
-  # Network Intrusion & Android Malware Detection Using Machine Learning
+# Network Intrusion & Android Malware Detection Using Machine Learning
 
 An end-to-end machine learning pipeline for detecting network anomalies and classifying Android malware behaviors using **NSL-KDD** and **CICMalDroid 2020** datasets.
 
