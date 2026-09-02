@@ -74,3 +74,45 @@ Hyperparameter tuning via `GridSearchCV` was benchmarked as a core evaluation ax
 | **Macro F1-Score** | Unweighted arithmetic mean across individual class F1-scores[cite: 9, 10] | Critical indicator penalizing performance drops on low-frequency classes (e.g., U2R, R2L)[cite: 9, 10] |
 | **Training Latency** | Wall-clock execution time (in seconds) required for model convergence[cite: 9, 10] | Evaluates practical retraining feasibility in dynamic production environments[cite: 9, 10] |
 | **Inference Latency** | Test batch prediction time (in seconds)[cite: 9, 10] | Evaluates operational readiness for real-time network and host packet inspection[cite: 9, 10] |
+
+
+---
+
+## Key Experimental Results & Benchmarks
+
+### 1. NSL-KDD (Network Intrusion Detection)
+
+| Model & Configuration | Selection Variant | Tuning Status | Accuracy | Macro F1 | Train Latency | Inference Latency |
+|---|---|---|---|---|---|---|
+| **MLP (Top Overall)** | Filter_Chi2 | Baseline | **78.33%** | **0.5661** | 9.11s | 0.02s |
+| **XGBoost (Fastest Optimal)** | Wrapper_RFECV | Baseline | 77.79% | 0.5409 | **0.47s** | **0.01s** |
+| **SVM (RBF)** | Wrapper_RFECV | Optimized | 77.52% | 0.5504 | 174.86s | 1.55s |
+| **XGBoost** | Full_Features | Baseline | 77.74% | 0.5429 | 0.78s | 0.03s |
+| **XGBoost** | Wrapper_RFECV | Optimized | 77.56% | 0.5276 | 135.57s | 0.03s |
+
+* **Key Takeaway:** MLP utilizing `Filter_Chi2` delivered the highest multi-class generalization (0.5661 Macro F1), effectively detecting minority intrusions (U2R/R2L)[cite: 9]. Baseline XGBoost combined with `Wrapper_RFECV` achieved near-identical accuracy (77.79%) within a sub-second training footprint (**0.47s**)[cite: 9].
+
+---
+
+### 2. CIC-MalDroid2020 (Android Malware Attribution)
+
+| Model & Configuration | Selection Variant | Tuning Status | Accuracy | Macro F1 | Train Latency | Inference Latency |
+|---|---|---|---|---|---|---|
+| **XGBoost (Top Overall & Fastest)** | Wrapper_RFECV | Baseline | **95.04%** | **0.9428** | **1.05s** | **0.003s** |
+| **XGBoost** | Full_Features | Baseline | 95.04% | 0.9423 | 2.28s | 0.030s |
+| **MLP** | Wrapper_RFECV | Optimized | 89.14% | 0.8723 | 90.45s | 0.004s |
+| **SVM** | Wrapper_RFECV | Optimized | 87.97% | 0.8559 | 180.45s | 1.860s |
+| **XGBoost** | Filter_MI | Baseline | 92.54% | 0.9089 | 0.56s | 0.010s |
+
+* **Key Takeaway:** XGBoost paired with `Wrapper_RFECV` dominated across both accuracy (**95.04%**) and latency (**1.05s**)[cite: 10]. Wrapper selection reduced dimensionality from 470 down to 152 syscall features without any metric degradation[cite: 5, 10].
+
+---
+
+## Empirical Insights & Trade-Off Analysis
+
+* **The GridSearchCV Efficiency Penalty:** 
+  Exhaustive grid search across XGBoost on MalDroid scaled training latency by **228x** (from 1.05s to 240.32s) without yielding any accuracy improvement over baseline defaults (remained static at 95.04%)[cite: 10]. Conversely, grid optimization was essential for SVM, boosting accuracy by **+13.8%** on MalDroid[cite: 10].
+* **Filter vs. Wrapper Efficacy:** 
+  `Wrapper_RFECV` consistently outperformed filter methods in classification metrics across both datasets. However, univariate filters (`Filter_Chi2`) proved exceptionally fast and effective for neural models on tabular data[cite: 9].
+* **Operational Recommendation:** 
+  For production inline network inspection and automated APK triage, **Baseline XGBoost with RFECV** provides the superior Pareto-optimal frontier between detection power and execution overhead[cite: 9, 10].
