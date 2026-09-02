@@ -116,3 +116,27 @@ Hyperparameter tuning via `GridSearchCV` was benchmarked as a core evaluation ax
   `Wrapper_RFECV` consistently outperformed filter methods in classification metrics across both datasets. However, univariate filters (`Filter_Chi2`) proved exceptionally fast and effective for neural models on tabular data[cite: 9].
 * **Operational Recommendation:** 
   For production inline network inspection and automated APK triage, **Baseline XGBoost with RFECV** provides the superior Pareto-optimal frontier between detection power and execution overhead[cite: 9, 10].
+
+  # Network Intrusion & Android Malware Detection Using Machine Learning
+
+An end-to-end machine learning pipeline for detecting network anomalies and classifying Android malware behaviors using **NSL-KDD** and **CICMalDroid 2020** datasets.
+
+---
+
+## 📁 Repository Structure
+
+```text
+├── datasets/
+│   ├── NSL-KDD/                    # Cleaned / sample dataset files
+│   └── CICMalDroid2020/            # Processed syscall/binder features
+├── notebooks/
+│   ├── 01_NSL_KDD_Pipeline.ipynb   # Preprocessing, Feature Selection & Training (NSL-KDD)
+│   ├── 02_MalDroid_Pipeline.ipynb  # Feature Extraction, Multi-class Classification (MalDroid)
+│   └── 03_Model_Comparison.ipynb   # Comprehensive evaluation, metrics & visualizations
+├── plots_and_results/
+│   ├── confusion_matrices/         # High-resolution confusion matrix heatmaps
+│   ├── feature_importance/         # Feature distribution and ranking plots (Chi2, MI, etc.)
+│   └── metrics_summary.csv         # Consolidated performance metrics across all models
+├── models/                         # Saved model checkpoints (.pkl / .joblib)
+├── requirements.txt                # Python dependencies
+└── README.md
