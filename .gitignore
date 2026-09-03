@@ -208,7 +208,7 @@ tempCodeRunnerFile.py
 
 # PyPI configuration file
 .pypirc
-
+*.ipynb linguist-language=Python
 # Marimo
 marimo/_static/
 marimo/_lsp/
